@@ -1,1 +1,2 @@
-# Bank-Go
+# Bank -- Go
+A basic banking program.
