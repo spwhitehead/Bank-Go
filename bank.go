@@ -1,38 +1,15 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+
+	"github.com/spwhitehead/Bank-Go/fileops"
 )
 
 const accountBalanceFile = "balance.txt"
 
-func getBalanceFromFile() (float64, error) {
-	data, err := os.ReadFile(accountBalanceFile)
-
-	if err != nil {
-		return 0, errors.New("failed to find file")
-	}
-
-	balanceText := string(data)
-	balance, err := strconv.ParseFloat(balanceText, 64)
-
-	if err != nil{
-		return 0, errors.New("failed to parse stored balance value")
-	}
-
-	return balance, nil
-}
-
-func writeBalanceToFile(balance float64){
-	balanceText := fmt.Sprint(balance)
-	os.WriteFile(accountBalanceFile, []byte(balanceText), 0644)
-}
-
 func main(){
-	var accountBalance, err = getBalanceFromFile()
+	var accountBalance, err = fileops.GetFloatFromFile(accountBalanceFile)
 
 	if err!= nil{
 		fmt.Println("ERROR")
@@ -72,7 +49,7 @@ func main(){
 			}
 			accountBalance += depositAmount
 			fmt.Printf("Balance Updated! New balance: %.2f\n", accountBalance)
-			writeBalanceToFile(accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
 
 		case 3:
 			fmt.Print("How much do you want to withdraw? ")
@@ -88,7 +65,7 @@ func main(){
 			}
 			accountBalance -= withdrawAmount
 			fmt.Printf("Balance Updated! New balance: %.2f\n",  accountBalance)
-			writeBalanceToFile(accountBalance)
+			fileops.WriteFloatToFile(accountBalance, accountBalanceFile)
 		
 		default:
 			fmt.Println()
