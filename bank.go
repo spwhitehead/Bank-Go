@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/Pallinder/go-randomdata"
 	"github.com/spwhitehead/Bank-Go/fileops"
 )
 
@@ -19,6 +20,7 @@ func main(){
 	}
 
 	fmt.Println("Welcome to Go Bank!")
+	fmt.Println("Located exclusively in:", randomdata.Country(randomdata.FullCountry))
 	for {
 		
 		presentOptions()
