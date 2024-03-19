@@ -4,53 +4,59 @@ import "fmt"
 
 func main(){
 	var accountBalance = 1000.00
-
-
 	fmt.Println("Welcome to Go Bank!")
-	fmt.Println("What do you want to do?")
-	fmt.Println("1. Check Balance")
-	fmt.Println("2. Deposit Money")
-	fmt.Println("3. Withdraw Money")
-	fmt.Println("4. Exit")
+	for {
+		
+		fmt.Println()
+		fmt.Println("What do you want to do?")
+		fmt.Println("1. Check Balance")
+		fmt.Println("2. Deposit Money")
+		fmt.Println("3. Withdraw Money")
+		fmt.Println("4. Exit")
 
-	// Get user input
+		// Get user input
 
-	var choice int
-	fmt.Print("Your choice: ")
-	fmt.Scan(&choice)
+		var choice int
+		fmt.Print("Your choice: ")
+		fmt.Scan(&choice)
 
-	wantsCheckBalance := choice == 1
-	wantsDepositMoney := choice == 2
-	wantsWithdrawMoney := choice == 3
-	// wantsExit := choice == 4
+		wantsCheckBalance := choice == 1
+		wantsDepositMoney := choice == 2
+		wantsWithdrawMoney := choice == 3
+		// wantsExit := choice == 4
 
-	if wantsCheckBalance {
-		fmt.Printf("Your balance is: %.2f\n", accountBalance)
-	} else if wantsDepositMoney{
-		fmt.Print("How much do you want to deposit? ")
-		var depositAmount float64
-		fmt.Scan(&depositAmount)
+		if wantsCheckBalance {
+				fmt.Printf("Your balance is: %.2f\n", accountBalance)
+		} else if wantsDepositMoney{
+				fmt.Print("How much do you want to deposit? ")
+				var depositAmount float64
+				fmt.Scan(&depositAmount)
 
-		if depositAmount <= 0{
-			fmt.Println("Invalid amount. Please enter an amount great than 0.")
-			return
+				if depositAmount <= 0{
+						fmt.Println("Invalid amount. Please enter an amount great than 0.")
+						continue
+				}
+				accountBalance += depositAmount
+				fmt.Printf("Balance Updated! New balance: %.2f\n", accountBalance)
+		} else if wantsWithdrawMoney{
+				fmt.Print("How much do you want to withdraw? ")
+				var withdrawAmount float64
+				fmt.Scan(&withdrawAmount)
+				if withdrawAmount > accountBalance{
+						fmt.Println("Invalid amount. Please enter an amount less than your balance.")
+						continue
+				}
+				if withdrawAmount <= 0{
+						fmt.Println("Invalid amount. Please enter an amount great than 0.")
+						continue
+				}
+				accountBalance -= withdrawAmount
+				fmt.Printf("Balance Updated! New balance: %.2f\n",  accountBalance)
+		} else {
+				fmt.Println()
+				fmt.Println("Have a great day! Goodbye.")
+				break
 		}
-		accountBalance += depositAmount
-		fmt.Printf("Balance Updated! New balance: %.2f\n", accountBalance)
-	} else if wantsWithdrawMoney{
-		fmt.Print("How much do you want to withdraw? ")
-		var withdrawAmount float64
-		fmt.Scan(&withdrawAmount)
-		if withdrawAmount > accountBalance{
-			fmt.Println("Invalid amount. Please enter an amount less than your balance.")
-		}
-		if withdrawAmount <= 0{
-			fmt.Println("Invalid amount. Please enter an amount great than 0.")
-			return
-		}
-		accountBalance -= withdrawAmount
-		fmt.Printf("Balance Updated! New balance: %.2f\n",  accountBalance)
-	} else {
-		fmt.Print("Have a great day! Goodbye.")
 	}
+	fmt.Println("Thanks for choosing our bank.")
 }
