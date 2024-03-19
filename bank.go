@@ -20,13 +20,25 @@ func main(){
 	fmt.Scan(&choice)
 
 	wantsCheckBalance := choice == 1
-	// wantsDepositMoney := choice == 2
-	// wantsWithdrawMoney := choice == 3
+	wantsDepositMoney := choice == 2
+	wantsWithdrawMoney := choice == 3
 	// wantsExit := choice == 4
 
 	if wantsCheckBalance {
-		fmt.Println("Your balance is:", accountBalance)
+		fmt.Printf("Your balance is: %.2f\n", accountBalance)
+	} else if wantsDepositMoney{
+		fmt.Print("How much do you want to deposit? ")
+		var depositAmount float64
+		fmt.Scan(&depositAmount)
+		accountBalance += depositAmount
+		fmt.Printf("Balance Updated! New balance: %.2f\n", accountBalance)
+	} else if wantsWithdrawMoney{
+		fmt.Print("How much do you want to withdraw? ")
+		var withdrawAmount float64
+		fmt.Scan(&withdrawAmount)
+		accountBalance -= withdrawAmount
+		fmt.Printf("Balance Updated! New balance: %.2f\n",  accountBalance)
+	} else {
+		fmt.Print("Have a great day! Goodbye.")
 	}
-
-	fmt.Println("Your choice:", choice)
 }
